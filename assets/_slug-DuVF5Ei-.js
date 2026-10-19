@@ -1,0 +1,1 @@
+import{t as e,u as t}from"./index-BtQEuWDh.js";import{t as n}from"./journal-266kubYy.js";var r=t(),i=function(){let t=e.useLoaderData();return(0,r.jsx)(n,{article:t})};export{i as component};
