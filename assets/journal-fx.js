@@ -5,7 +5,7 @@
 
   var css = document.createElement("style");
   css.textContent = [
-    ".read-bar{position:fixed;left:0;top:0;z-index:100;width:100%;height:3px;background:rgba(227,6,19,.18);pointer-events:none}",
+    ".read-bar{position:fixed;left:0;top:0;z-index:1000;width:100%;height:4px;background:rgba(227,6,19,.35);pointer-events:none}",
     ".read-bar span{display:block;height:100%;width:0;background:#e30613}",
     ".nav-buy{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;line-height:1.1;text-align:center;max-width:9.6rem;white-space:normal;padding:.6rem .65rem}",
     "@media(min-width:760px){.nav-buy{max-width:none;font-size:.95rem;white-space:nowrap}}",
@@ -49,6 +49,17 @@
   bar.innerHTML = "<span></span>";
   document.body.appendChild(bar);
   var fill = bar.firstChild;
+  document.querySelectorAll("img").forEach(function (img) {
+    function repair() {
+      var src = img.getAttribute("src") || "";
+      if (/\.jpg($|\?)/.test(src) && src.indexOf("/sales/") !== -1 && img.getAttribute("data-repaired") !== "1") {
+        img.setAttribute("data-repaired", "1");
+        img.src = src.replace(/\.jpg($|\?)/, ".svg$1");
+      }
+    }
+    if (img.complete && img.naturalWidth === 0) repair();
+    img.addEventListener("error", repair);
+  });
 
   document.querySelectorAll("h1.display, h1.journal-display").forEach(function (h) {
     if (h.querySelector(".title-draw")) return;
