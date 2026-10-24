@@ -27,19 +27,19 @@
     ".buy-toast strong{display:block;font-family:\"Barlow Condensed\",sans-serif;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:1.05rem;line-height:1}",
     ".buy-toast span{display:block;margin-top:.15rem;color:#b7b1a6;font-size:.78rem}",
     "@media(min-width:760px){.buy-toast{right:auto;width:22rem}}",
-    ".offer{position:fixed;inset:0;z-index:90;display:grid;place-items:end center;padding:1rem;background:rgba(0,0,0,.72)}",
-    "@media(min-width:760px){.offer{place-items:center}}",
-    ".offer[hidden]{display:none}",
-    ".offer-card{position:relative;width:min(100%,26rem);background:#0b0b0c;border:1px solid rgba(243,239,230,.16);border-top:2px solid #e30613;padding:1.1rem 1.1rem 1.2rem;box-shadow:0 30px 70px rgba(0,0,0,.55)}",
-    ".offer-x{position:absolute;top:.45rem;right:.55rem;background:transparent;color:#f3efe6;border:0;font-size:1.4rem;line-height:1;cursor:pointer;padding:.2rem .35rem}",
-    ".offer-book{display:block;width:min(58%,13.5rem);margin:0 auto .9rem;text-decoration:none}",
-    ".offer-book img{display:block;width:100%;height:auto}",
-    reduced ? "" : "@keyframes dm-float{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-8px) rotate(1.2deg)}}.offer-book img{animation:dm-float 4.8s ease-in-out infinite}",
-    ".offer .kicker{text-align:center}",
-    ".offer-title{margin:.35rem 0 .4rem;text-align:center;font-family:\"Barlow Condensed\",sans-serif;font-weight:700;font-size:2rem;letter-spacing:.04em;text-transform:uppercase;line-height:.95;color:#f3efe6}",
-    ".offer p{text-align:center;color:#d9d3c7;margin:0 0 1rem}",
-    ".offer-actions{display:flex;flex-direction:column;gap:.55rem}",
-    ".offer-actions .btn{text-align:center}"
+    ".dm-gate{position:fixed;inset:0;z-index:90;display:grid;place-items:end center;padding:1rem;background:rgba(0,0,0,.72)}",
+    "@media(min-width:760px){.dm-gate{place-items:center}}",
+    ".dm-gate[hidden]{display:none}",
+    ".dm-gate-card{position:relative;width:min(100%,26rem);background:#0b0b0c;border:1px solid rgba(243,239,230,.16);border-top:2px solid #e30613;padding:1.1rem 1.1rem 1.2rem;box-shadow:0 30px 70px rgba(0,0,0,.55)}",
+    ".dm-gate-x{position:absolute;top:.45rem;right:.55rem;background:transparent;color:#f3efe6;border:0;font-size:1.4rem;line-height:1;cursor:pointer;padding:.2rem .35rem}",
+    ".dm-gate-book{display:block;width:min(58%,13.5rem);margin:0 auto .9rem;text-decoration:none}",
+    ".dm-gate-book img{display:block;width:100%;height:auto}",
+    reduced ? "" : "@keyframes dm-float{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-8px) rotate(1.2deg)}}.dm-gate-book img{animation:dm-float 4.8s ease-in-out infinite}",
+    ".dm-gate .kicker{text-align:center}",
+    ".dm-gate-title{margin:.35rem 0 .4rem;text-align:center;font-family:\"Barlow Condensed\",sans-serif;font-weight:700;font-size:2rem;letter-spacing:.04em;text-transform:uppercase;line-height:.95;color:#f3efe6}",
+    ".dm-gate p{text-align:center;color:#d9d3c7;margin:0 0 1rem}",
+    ".dm-gate-actions{display:flex;flex-direction:column;gap:.55rem}",
+    ".dm-gate-actions .btn{text-align:center}"
   ].join("");
   document.head.appendChild(css);
 
@@ -150,16 +150,16 @@
   }
 
   var offer = document.createElement("div");
-  offer.className = "offer";
+  offer.className = "dm-gate";
   offer.hidden = true;
   offer.innerHTML =
-    '<div class="offer-card" role="dialog" aria-modal="true" aria-labelledby="offer-title">' +
-    '<button type="button" class="offer-x" aria-label="Fermer">×</button>' +
-    '<a class="offer-book" href="' + CAPTURE + '"><img src="/sales/book.jpg" alt="Le Secret des Sigma, couverture noire, rue sous la pluie." width="900" height="1200"/></a>' +
+    '<div class="dm-gate-card" role="dialog" aria-modal="true" aria-labelledby="dm-gate-title">' +
+    '<button type="button" class="dm-gate-x" aria-label="Fermer">×</button>' +
+    '<a class="dm-gate-book" href="' + CAPTURE + '"><img src="/sales/book.jpg" alt="Le Secret des Sigma, couverture noire, rue sous la pluie." width="900" height="1200"/></a>' +
     '<p class="kicker">Le livre</p>' +
-    '<p class="offer-title" id="offer-title">Le Secret des Sigma</p>' +
+    '<p class="dm-gate-title" id="dm-gate-title">Le Secret des Sigma</p>' +
     '<p>L’extrait est gratuit. Le livre, si la ligne est la vôtre.</p>' +
-    '<div class="offer-actions"><a class="btn" href="' + CAPTURE + '">Recevoir l’extrait</a><a class="btn btn-ghost" href="' + SALES + '">Lire la page du livre</a></div>' +
+    '<div class="dm-gate-actions"><a class="btn" href="' + CAPTURE + '">Recevoir l’extrait</a><a class="btn btn-ghost" href="' + SALES + '">Lire la page du livre</a></div>' +
     "</div>";
   document.body.appendChild(offer);
 
@@ -175,7 +175,7 @@
     toast.hidden = true;
     offer.hidden = false;
   }
-  offer.querySelector(".offer-x").addEventListener("click", shut);
+  offer.querySelector(".dm-gate-x").addEventListener("click", shut);
   offer.addEventListener("click", function (e) { if (e.target === offer) shut(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") shut(); });
   setTimeout(openOffer, 48000);
